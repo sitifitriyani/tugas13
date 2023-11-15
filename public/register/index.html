@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="flip-container" id='flippr'>
+      <div class="flipper">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+    </div>
+    
+    <h1 class="text" id="welcome">Welcome <span>To My Place.</span></h1>
+    
+    <form name="login">
+      <input type="text" name="username" placeholder='Username'>
+      <input type="password" name="password" placeholder='Password'>
+        
+      <div class='login'>
+        <a href="#"><i class="icon-cog"></i> I've fogotten my password</a>
+        <button>regist</button>
+      </div>
+
+    </form>
+  </div>
+  
+</body>
+</html>
+<script>
+    
+    document.querySelector("button").onclick = async (e) => {
+      e.preventDefault();
+      const username = document.login.username.value;//login dari nama form yang ada di atas
+      const password = document.login.password.value;
+      await fetch("/api/register", { 
+        method: "POST", //method tergantung apa yang akan kita lakukan
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+      alert("Your account is already registered.");
+      location.href = "/login"; //pindah ke lokasi login kalau akunnya sudah terdaftar
+    };
+  </script>
+</form>
